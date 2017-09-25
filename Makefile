@@ -13,7 +13,7 @@ test: ## Run unit tests and generate coverage.
                    --cover-erase \
                    --cover-min-percentage=90
 
-LINT_TARGETS := muse_usps_server
+LINT_TARGETS := muse_usps_server wsgi.py
 .PHONY: lint
 lint: ## Run pep8 and pylint checks on python files.
 	pep8 $(LINT_TARGETS)

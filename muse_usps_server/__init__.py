@@ -6,7 +6,7 @@ import muse_usps
 
 
 # Load configuration options from json config file.
-with open('muse_usps_server.json') as CONF_JSON_FILE:
+with open('config.json') as CONF_JSON_FILE:
     CONF_JSON = json.load(CONF_JSON_FILE)
 USPS_API_URL = CONF_JSON['api_url']
 USPS_USER_ID = CONF_JSON['user_id']

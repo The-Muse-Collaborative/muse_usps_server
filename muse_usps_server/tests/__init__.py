@@ -24,17 +24,17 @@ class MuseUspsServerTestCase(unittest.TestCase):
 
     def test_valid_address(self):
         """ Some docstring. """
-        expected = {'address_line_1': '1600 PENNSYLVANIA AVE NW',                    
-                    'address_line_2': '',                                            
-                    'city': 'WASHINGTON',                                            
-                    'state': 'DC',                                                   
-                    'zip_code': '20500-0003',                                        
-                    'usps_extra': {                                                  
-                        'ReturnText': 'Default address: The address you ' +  
-                                      'entered was found but more ' +  
-                                      'information is needed (such as an ' +      
+        expected = {'address_line_1': '1600 PENNSYLVANIA AVE NW',
+                    'address_line_2': '',
+                    'city': 'WASHINGTON',
+                    'state': 'DC',
+                    'zip_code': '20500-0003',
+                    'usps_extra': {
+                        'ReturnText': 'Default address: The address you ' +
+                                      'entered was found but more ' +
+                                      'information is needed (such as an ' +
                                       'apartment, suite, or box number) to ' +
-                                      'match to a specific address.'}} 
+                                      'match to a specific address.'}}
         response = self.app.post('/validate',
                                  data=json.dumps(TEST_ADDRESS),
                                  content_type='application/json')
