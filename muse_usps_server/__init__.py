@@ -1,4 +1,5 @@
-""" Some docstring. """
+""" Simple flask server allowing AJAX requests to validate addresses using the
+USPS API. """
 import json
 
 import flask
@@ -16,7 +17,13 @@ APPLICATION = flask.Flask(__name__)
 
 @APPLICATION.route('/validate', methods=['POST'])
 def validate_address():
-    """ Validates an address that comes in as JSON data."""
+    """ Validates an address that comes in as JSON data.
+
+    See muse_usps.validate documentation for request structure. Any extra
+    fields are ignored. Returns a 400 error if the request was valid, but an
+    error was reported by the USPS API. The 400 response will include an
+    "error" field with the error message returned by the USPS API. All other
+    backend errors will result in a 500 error with no response. """
     try:
         validated = muse_usps.validate(USPS_API_URL,
                                        USPS_USER_ID,

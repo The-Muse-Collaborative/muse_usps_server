@@ -1,4 +1,4 @@
-""" Some docstring. """
+""" Unit tests for the address validation flask server. """
 import copy
 import json
 import unittest
@@ -15,15 +15,15 @@ TEST_ADDRESS = {'address_line_1': '1600 Pennsylvania Ave NW',
 
 
 class MuseUspsServerTestCase(unittest.TestCase):
-    """ Some docstring. """
+    """ Flask server testing class. """
 
     def setUp(self):
-        """ Some docstring. """
+        """ Puts flask in testing mode and makes a test client. """
         muse_usps_server.APPLICATION.testing = True
         self.app = muse_usps_server.APPLICATION.test_client()
 
     def test_valid_address(self):
-        """ Some docstring. """
+        """ Tests what should be a valid request. """
         expected = {'address_line_1': '1600 PENNSYLVANIA AVE NW',
                     'address_line_2': '',
                     'city': 'WASHINGTON',
@@ -42,7 +42,7 @@ class MuseUspsServerTestCase(unittest.TestCase):
         assert expected == actual
 
     def test_missing_field(self):
-        """ Some docstring. """
+        """ Tests a request that should return a 400 error. """
         address = copy.deepcopy(TEST_ADDRESS)
         address['address_line_1'] = ''
         expected = {'error': 'Address Not Found.'}
