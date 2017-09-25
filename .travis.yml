@@ -20,7 +20,6 @@ before_install:
 - chmod 0600 travis_github_deploy_key
 - cp travis_github_deploy_key ~/.ssh/id_rsa
 script:
-- python setup.py install
 - make pre-commit
 after_success:
 # Only publish docs and coverage if it's a non-pull request on master with
