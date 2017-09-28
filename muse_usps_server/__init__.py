@@ -16,7 +16,7 @@ APPLICATION = flask.Flask(__name__)
 
 
 @APPLICATION.route('/validate', methods=['POST'])
-def validate_address():
+def validate():
     """ Validates an address that comes in as JSON data.
 
     See muse_usps.validate documentation for request structure. Any extra
