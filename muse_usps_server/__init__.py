@@ -42,4 +42,4 @@ def validate():
         return flask.jsonify({'error': str(ex).strip()}), 400
     except Exception as ex:
         LOGGER.error('Address validation unknown error: %s', ex)
-        raise # This will result in a 500 error.
+        raise  # This will result in a 500 error.
