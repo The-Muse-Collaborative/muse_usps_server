@@ -1,9 +1,16 @@
 """ Simple flask server allowing AJAX requests to validate addresses using the
 USPS API. """
 import json
+import logging
+import logging.config
 
 import flask
 import muse_usps
+
+
+# Load logging options from ini config file.
+logging.config.fileConfig('logging.ini')
+LOGGER = logging.getLogger(__name__)
 
 
 # Load configuration options from json config file.
@@ -25,9 +32,14 @@ def validate():
     "error" field with the error message returned by the USPS API. All other
     backend errors will result in a 500 error with no response. """
     try:
+        LOGGER.debug('Address validation request: %s', flask.request.json)
         validated = muse_usps.validate(USPS_API_URL,
                                        USPS_USER_ID,
                                        flask.request.json)
         return flask.jsonify(validated)
     except RuntimeError as ex:
+        LOGGER.error('Address validation runtime error: %s', ex)
         return flask.jsonify({'error': str(ex).strip()}), 400
+    except Exception as ex:
+        LOGGER.error('Address validation unknown error: %s', ex)
+        raise # This will result in a 500 error.
