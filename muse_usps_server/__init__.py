@@ -32,10 +32,11 @@ def validate():
     "error" field with the error message returned by the USPS API. All other
     backend errors will result in a 500 error with no response. """
     try:
-        LOGGER.debug('Address validation request: %s', flask.request.json)
+        LOGGER.info('Address validation request: %s', flask.request.json)
         validated = muse_usps.validate(USPS_API_URL,
                                        USPS_USER_ID,
                                        flask.request.json)
+        LOGGER.debug('Address validation response: %s', validated)
         return flask.jsonify(validated)
     except RuntimeError as ex:
         LOGGER.error('Address validation runtime error: %s', ex)
