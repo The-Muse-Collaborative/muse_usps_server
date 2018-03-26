@@ -1,3 +1,5 @@
 config.json
 .coverage
 *.pyc
+muse_usps_server_api_url
+muse_usps_server_user_id

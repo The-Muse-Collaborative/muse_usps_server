@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  muse_usps_server:
+    build: .
+    secrets:
+      - muse_usps_server_api_url
+      - muse_usps_server_user_id
+    ports:
+      - "8000:8000"
+secrets:
+  muse_usps_server_api_url:
+    file: muse_usps_server_api_url
+  muse_usps_server_user_id:
+    file: muse_usps_server_user_id
