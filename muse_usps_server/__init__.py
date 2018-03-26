@@ -5,6 +5,7 @@ import logging
 import logging.config
 
 import flask
+import get_docker_secret
 import muse_usps
 
 
@@ -12,12 +13,11 @@ import muse_usps
 logging.config.fileConfig('logging.ini')
 LOGGER = logging.getLogger(__name__)
 
-
-# Load configuration options from json config file.
-with open('config.json') as CONF_JSON_FILE:
-    CONF_JSON = json.load(CONF_JSON_FILE)
-USPS_API_URL = CONF_JSON['api_url']
-USPS_USER_ID = CONF_JSON['user_id']
+# Get configuration secrets.
+USPS_API_URL = get_docker_secret.get_docker_secret('muse_usps_server_api_url',
+                                                   safe=False)
+USPS_USER_ID = get_docker_secret.get_docker_secret('muse_usps_server_user_id',
+                                                   safe=False)
 
 APPLICATION = flask.Flask(__name__)
 
